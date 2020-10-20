@@ -69,6 +69,7 @@
 
 <style lang="scss">
   .list {
+    word-break: break-all;
     white-space: normal;
     font-size: 16px;
     display: inline-block;

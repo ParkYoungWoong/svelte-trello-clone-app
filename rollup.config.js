@@ -2,6 +2,7 @@ import path from 'path';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import alias from '@rollup/plugin-alias';
+import strip from '@rollup/plugin-strip';
 import svelte from 'rollup-plugin-svelte';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
@@ -95,6 +96,10 @@ export default {
 		// browser on changes when not in production
 		!production && livereload('public'),
 
+		production && strip({
+			include: '**/*.(svelte|js)'
+		}),
+		
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
 		production && terser()
