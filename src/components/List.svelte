@@ -9,13 +9,13 @@
   export let list
   export let sortableLists
 
-  let sortableCards // Card 정렬를 위한 SortableJS 인스턴스를 지정합니다.
-  let cardsEl // SortableJS에서 사용할 Card 목록 요소를 지정합니다.
+  let sortableCards
+  let cardsEl
 
   function disableSortable(event) {
     console.log(event.detail)
-    sortableLists.option('disabled', event.detail) // For Lists
-    sortableCards.option('disabled', event.detail) // For Cards
+    sortableLists.option('disabled', event.detail)
+    sortableCards.option('disabled', event.detail)
   }
 
   onMount(() => {
@@ -69,14 +69,8 @@
 
 <style lang="scss">
   .list {
-    // font 관련 속성들은 상속(inherit)되기 때문에,
-    // .list의 자식 요소들에 영향을 주지 않기 위해,
-    // white-space 속성 값을 여기서 초기화합니다.
     white-space: normal;
-    // inline-block 요소의 띄어쓰기 공간을 부모 요소에서 초기화했기 때문에,
-    // 다시 글자 크기를 원상태로 복원합니다.
     font-size: 16px;
-    word-break: break-all;
     display: inline-block;
     vertical-align: top;
     line-height: 20px;
@@ -84,9 +78,6 @@
     height: 100%;
     margin: 0 4px;
     user-select: none;
-    // .sortable-ghost는 SortableJS에서 생성하는 선택자입니다.
-    // Svelte에서는 Hash가 자동으로 붙기 때문에 :global()를 사용해,
-    // .sortable-ghost 선택자에 Hash가 붙지 않도록 합니다.
     :global(&.sortable-ghost) {
       opacity: 0.2;
       position: relative;
@@ -101,16 +92,10 @@
         border-radius: 4px;
       }
     }
-    // .sortable-chosen는 SortableJS에서 생성하는 선택자입니다.
-    // Svelte에서는 Hash가 자동으로 붙기 때문에 :global()를 사용해,
-    // .sortable-chosen 선택자에 Hash가 붙지 않도록 합니다.
     :global(&.sortable-chosen) {
       cursor: move;
     }
     .list__inner {
-      // 카드 목록 영역 크기가 자동 조절이 되도록,
-      // Flexible box로 만들고 수직 정렬합니다.
-      // 기본 값은 수평 정렬(row)입니다.
       display: flex;
       flex-direction: column;
       max-height: 100%;
